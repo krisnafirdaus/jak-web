@@ -14,6 +14,14 @@ body {
   margin: 55px 50px;
   border-radius: 4px;
 
+  .rectangle {
+    height: 8px;
+    background: #eeeeee;
+    width: 300px;
+    position: absolute;
+    top: 120px;
+  }
+
   .w-75 {
     width: 75%;
   }
@@ -48,6 +56,8 @@ body {
 
         .wrapper-circle {
           padding: 20px 38px;
+          display: flex;
+
           .circle {
             background: #ff8a00;
             box-shadow: 0px 2px 4px rgba(255, 138, 0, 0.3);
@@ -57,6 +67,15 @@ body {
             height: 30px;
             display: flex;
             align-items: center;
+
+            &.not-active {
+              background: rgba(255, 138, 0, 0.2);
+              color: #ff8a00 !important;
+            }
+
+            &.mr-140 {
+              margin-right: 140px;
+            }
 
             &-text {
               padding: 6px 11px;
@@ -91,13 +110,6 @@ body {
       margin-bottom: 36px;
       padding-left: 40px;
 
-      .title-back {
-        font-family: "InterUI";
-        font-size: 14px;
-        line-height: 16px;
-        color: #000000;
-      }
-
       .wrapper-title {
         display: flex;
         justify-content: space-between;
@@ -107,13 +119,6 @@ body {
         .wrapper-checkbox {
           display: flex;
           margin-top: 37px;
-
-          // input[type="checkbox" i] {
-          //   width: 20px;
-          //   height: 20px;
-          //   margin-top: 0px;
-          //   margin-right: 10px;
-          // }
 
           label {
             font-size: 14px;
@@ -196,6 +201,61 @@ body {
         height: 60px;
         border: 1px solid #cccccc;
         margin-top: 36px;
+        padding-left: 15px;
+        box-sizing: border-box;
+
+        &:focus ~ .floating-label,
+        &:not(:focus):valid ~ .floating-label {
+          top: 180px;
+          font-size: 11px;
+          opacity: 1;
+
+          &.phone-number {
+            top: 280px;
+          }
+
+          &.dropshipper-name {
+            top: 280px;
+          }
+        }
+
+        &:focus {
+          padding-left: 15px;
+          border: 1px solid red;
+        }
+        &.errTel {
+          border: 1px solid red;
+        }
+      }
+
+      input[type="text"]:focus {
+        padding-left: 15px;
+        border: 1px solid red;
+      }
+
+      .floating-label {
+        position: absolute;
+        pointer-events: none;
+        left: 55px;
+        top: 190px;
+        transition: 0.2s ease all;
+
+        &.phone-number {
+          top: 290px;
+        }
+
+        &.delivery-address {
+          top: 380px;
+        }
+
+        &.dropshipper-name {
+          left: 640px;
+        }
+
+        &.dropshipper-number {
+          left: 640px;
+          top: 290px;
+        }
       }
 
       textarea {
@@ -203,6 +263,13 @@ body {
         height: 120px;
         border: 1px solid #cccccc;
         margin-top: 36px;
+        padding-left: 15px;
+        padding-top: 35px;
+
+        &:focus {
+          padding-left: 15px;
+          padding-top: 35px;
+        }
       }
 
       .flex-input {
@@ -278,6 +345,7 @@ body {
             box-shadow: 3px 5px 10px rgba(255, 138, 0, 0.2);
             border-radius: 2px;
             color: #ffffff;
+            cursor: pointer;
           }
         }
       }
