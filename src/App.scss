@@ -1,0 +1,286 @@
+body {
+  font-family: "Montserrat";
+  font-style: normal;
+  background-color: #fffae6;
+  margin: 0;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  background-color: #ffffff;
+  margin: 55px 50px;
+  border-radius: 4px;
+
+  .w-75 {
+    width: 75%;
+  }
+
+  .w-25 {
+    width: 25%;
+  }
+
+  .d-flex {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .sub-app {
+    width: 100%;
+    .bangs {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: -100%;
+      bottom: 0;
+      margin: auto;
+      background-color: #fffae6;
+      border-radius: 35px;
+      width: 500px;
+      height: 70px;
+
+      .sub-bangs {
+        display: flex;
+        align-items: center;
+        height: 100%;
+
+        .wrapper-circle {
+          padding: 20px 38px;
+          .circle {
+            background: #ff8a00;
+            box-shadow: 0px 2px 4px rgba(255, 138, 0, 0.3);
+            border-radius: 15px;
+            color: white;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+
+            &-text {
+              padding: 6px 11px;
+              margin-right: 21px;
+            }
+
+            &-title {
+              color: #ff8a00;
+              font-family: "InterUI";
+              font-size: 16px;
+              line-height: 19px;
+            }
+
+            &-arrow {
+              margin-left: 25px;
+              border: solid #ff8a00;
+              border-width: 0 2px 2px 0;
+              display: inline-block;
+              padding: 3px;
+
+              transform: rotate(-45deg);
+              -webkit-transform: rotate(-45deg);
+            }
+          }
+        }
+      }
+    }
+
+    .container-title-summary {
+      margin-top: 37px;
+      display: flex;
+      margin-bottom: 36px;
+      padding-left: 40px;
+
+      .title-back {
+        font-family: "InterUI";
+        font-size: 14px;
+        line-height: 16px;
+        color: #000000;
+      }
+
+      .wrapper-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-right: 57px;
+
+        .wrapper-checkbox {
+          display: flex;
+          margin-top: 37px;
+
+          // input[type="checkbox" i] {
+          //   width: 20px;
+          //   height: 20px;
+          //   margin-top: 0px;
+          //   margin-right: 10px;
+          // }
+
+          label {
+            font-size: 14px;
+            line-height: 16px;
+            color: #2d2a40;
+          }
+
+          .container-label {
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-left: 35px;
+            text-align: center;
+
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+          }
+
+          /* Hide the browser's default checkbox */
+          .container-label input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+          }
+
+          /* Create a custom checkbox */
+          .checkmark {
+            position: absolute;
+            left: 0;
+            height: 25px;
+            width: 25px;
+            background-color: #eee;
+          }
+
+          /* On mouse-over, add a grey background color */
+          .container-label:hover input ~ .checkmark {
+            background-color: #ccc;
+          }
+
+          /* When the checkbox is checked, add a blue background */
+          .container-label input:checked ~ .checkmark {
+            border: 2px solid #1bd97b;
+            background-color: #ffffff;
+          }
+
+          /* Create the checkmark/indicator (hidden when not checked) */
+          .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+          }
+
+          /* Show the checkmark when checked */
+          .container-label input:checked ~ .checkmark:after {
+            display: block;
+          }
+
+          /* Style the checkmark/indicator */
+          .container-label .checkmark:after {
+            left: 9px;
+            top: 5px;
+            width: 5px;
+            height: 10px;
+            border: 1px solid #1bd97b;
+            border-width: 0 3px 3px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+          }
+        }
+      }
+
+      input {
+        width: 90%;
+        height: 60px;
+        border: 1px solid #cccccc;
+        margin-top: 36px;
+      }
+
+      textarea {
+        width: 90%;
+        height: 120px;
+        border: 1px solid #cccccc;
+        margin-top: 36px;
+      }
+
+      .flex-input {
+        display: flex;
+
+        .left-input {
+          width: 60%;
+        }
+
+        .right-input {
+          width: 40%;
+        }
+      }
+
+      .title-sub-app {
+        font-weight: 700;
+        font-size: 36px;
+        line-height: 44px;
+        color: #ff8a00;
+        margin-top: 37px;
+      }
+
+      .border-summary {
+        border-left: 1px solid #ff8a00;
+
+        .summary-sub-app {
+          font-weight: 700;
+          font-size: 24px;
+          line-height: 29px;
+          color: #ff8a00;
+          margin-top: 43px;
+          margin-left: 19px;
+          margin-right: 20px;
+
+          .price {
+            color: #000000;
+            font-family: "InterUI";
+            font-size: 14px;
+            line-height: 16px;
+          }
+
+          p {
+            margin: 0;
+          }
+
+          span {
+            color: #d8d8d8;
+            font-size: 14px;
+            line-height: 16px;
+            margin-top: 10px;
+          }
+
+          .cost-goods {
+            margin-top: 206px;
+            margin-bottom: 13px;
+          }
+
+          .drop-fee {
+            margin-bottom: 25px;
+          }
+
+          .total-fee {
+            margin-bottom: 30px;
+          }
+
+          button {
+            font-size: 18px;
+            line-height: 21px;
+            width: 100%;
+            height: 60px;
+            background: #ff8a00;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 3px 5px 10px rgba(255, 138, 0, 0.2);
+            border-radius: 2px;
+            color: #ffffff;
+          }
+        }
+      }
+    }
+  }
+}
