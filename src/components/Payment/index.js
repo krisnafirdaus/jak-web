@@ -8,9 +8,9 @@ const Payment = () => {
 
   const [sum, setSum] = useState([]);
   const [data, setData] = useState({
-    shipment: save.shipment || "GO-SEND",
-    price: save.price || "15,000",
-    payment: save.payment || "e-Wallet",
+    shipment: save?.shipment || "GO-SEND",
+    price: save?.price || "15,000",
+    payment: save?.payment || "e-Wallet",
   });
   const [pay, setPay] = useState([]);
 
@@ -21,9 +21,9 @@ const Payment = () => {
   useEffect(() => {
     if (save) {
       setData({
-        shipment: save.shipment,
-        price: save.price,
-        payment: save.payment,
+        shipment: save?.shipment || "GO-SEND",
+        price: save?.price || "15,000",
+        payment: save?.payment || "e-Wallet",
       });
       setPay([parseInt(save?.price?.split(",").join(""))]);
     }
@@ -33,7 +33,9 @@ const Payment = () => {
     setSum([...JSON.parse(localStorage.getItem("delivery"))]);
   }, []);
 
-  const count = [...sum, ...pay];
+  const count = !isNaN(pay[0])
+    ? [...sum, ...pay]
+    : [...sum, JSON.parse(data.price?.split(",").join(""))];
 
   useEffect(() => {
     localStorage.setItem("finishcount", JSON.stringify(count));
@@ -225,7 +227,17 @@ const Payment = () => {
               )}
             </p>
           </div>
-          <a href="/finish">
+          <a
+            href="/finish"
+            onClick={() => {
+              localStorage.setItem(
+                "payment",
+                JSON.stringify({
+                  ...data,
+                })
+              );
+            }}
+          >
             <button>Pay with {data.payment}</button>
           </a>
         </div>

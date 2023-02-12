@@ -2,6 +2,29 @@
   .rectangle {
     top: 40% !important;
   }
+
+  .back {
+    display: flex !important;
+    align-items: center;
+    text-decoration: none;
+
+    .arrow-back {
+      margin-right: 10px;
+      border: 1px solid #000000;
+      border-width: 0 2px 2px 0;
+      display: inline-block;
+      padding: 3px;
+      transform: rotate(130deg) !important;
+    }
+
+    .title-back {
+      font-family: "InterUI";
+      font-size: 14px;
+      line-height: 16px;
+      color: #000000;
+    }
+  }
+
   .wrapper-title {
     height: 100%;
     justify-content: center !important;

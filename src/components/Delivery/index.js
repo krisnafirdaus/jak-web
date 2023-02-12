@@ -155,7 +155,14 @@ const Delivery = () => {
             </p>
           </div>
           <Link to="payment">
-            <button onClick={() => onClick()}>Continue to Payment</button>
+            <button
+              onClick={() => {
+                localStorage.removeItem("checkbox");
+                onClick();
+              }}
+            >
+              Continue to Payment
+            </button>
           </Link>
         </div>
       </div>{" "}

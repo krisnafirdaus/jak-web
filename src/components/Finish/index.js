@@ -30,9 +30,12 @@ const Finish = () => {
             <div className="rectangle"></div>
             <p className="order-id">Order ID: {generateRandomString()}</p>
             <span className="order-will">
-              Your order will be delivered today with {dataPayment.shipment}
+              Your order will be delivered today with {dataPayment?.shipment}
             </span>
-            <a href="/">Go to Homepage</a>
+            <a href="/" className="back">
+              <i className="arrow-back"></i>
+              <div className="title-back">Go to Homepage</div>
+            </a>
           </div>
         </div>
       </div>
@@ -44,13 +47,13 @@ const Finish = () => {
           <div className="container-delivery">
             <p className="delivery-estimation">Delivery estimation</p>
             <span className="title-delivery">
-              today by {dataPayment.shipment}
+              today by {dataPayment?.shipment}
             </span>
           </div>
           <div className="summary-divider-method"></div>
           <div className="container-delivery">
             <p className="delivery-estimation">Payment Method</p>
-            <span className="title-delivery">{dataPayment.payment}</span>
+            <span className="title-delivery">{dataPayment?.payment}</span>
           </div>
           <div className="cost-goods-shipment d-flex">
             <span>Cost of goods</span>
@@ -64,10 +67,10 @@ const Finish = () => {
           )}
           <div className="drop-fee-shipment d-flex">
             <span>
-              <span className="bold-shipment">{dataPayment.shipment}</span>{" "}
+              <span className="bold-shipment">{dataPayment?.shipment}</span>{" "}
               Shipment
             </span>
-            <span className="price">{dataPayment.price}</span>
+            <span className="price">{dataPayment?.price}</span>
           </div>
           <div className="total-fee-finish d-flex">
             <p>Total</p>
