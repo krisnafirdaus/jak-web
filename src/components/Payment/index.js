@@ -1,17 +1,43 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { thousandSeparator } from "../../helper";
 import "./Payment.scss";
 
 const Payment = () => {
+  // const [data, setData] = useState({});
+  const [save, setSave] = useState([]);
+
+  const [sum, setSum] = useState([]);
   const [data, setData] = useState({
-    shipment: "GO-SEND",
-    price: "15,000",
-    payment: "e-Wallet",
+    shipment: save.shipment || "GO-SEND",
+    price: save.price || "15,000",
+    payment: save.payment || "e-Wallet",
   });
+  const [pay, setPay] = useState([]);
 
   useEffect(() => {
-    localStorage.setItem("payment", JSON.stringify(data));
-  }, [data]);
+    setSave(JSON.parse(localStorage.getItem("payment")));
+  }, []);
+
+  useEffect(() => {
+    if (save) {
+      setData({
+        shipment: save.shipment,
+        price: save.price,
+        payment: save.payment,
+      });
+      setPay([parseInt(save?.price?.split(",").join(""))]);
+    }
+  }, [save]);
+
+  useEffect(() => {
+    setSum([...JSON.parse(localStorage.getItem("delivery"))]);
+  }, []);
+
+  const count = [...sum, ...pay];
+
+  useEffect(() => {
+    localStorage.setItem("finishcount", JSON.stringify(count));
+  }, [count]);
 
   const ShipmentData = [
     {
@@ -59,7 +85,7 @@ const Payment = () => {
     <>
       <div className="payment w-75">
         <a href="/" className="back">
-          <i class="arrow-back"></i>
+          <i className="arrow-back"></i>
           <div className="title-back">Back to delivery</div>
         </a>
         <div className="wrapper-title">
@@ -77,11 +103,31 @@ const Payment = () => {
                   (x.id > 1 && "ml-10")
                 }
                 onClick={() => {
+                  const index = pay.indexOf(
+                    parseInt(data.price?.split(",").join(""))
+                  );
+
                   setData({
                     ...data,
                     shipment: x.value,
                     price: x.price,
                   });
+
+                  if (index > -1) {
+                    pay.splice(index, 1);
+                    setPay([parseInt(x.price?.split(",").join(""))]);
+                  } else {
+                    setPay([parseInt(x.price?.split(",").join(""))]);
+                  }
+
+                  localStorage.setItem(
+                    "payment",
+                    JSON.stringify({
+                      ...data,
+                      shipment: x.value,
+                      price: x.price,
+                    })
+                  );
                 }}
               >
                 <div className="border-shipment-sub">
@@ -114,12 +160,16 @@ const Payment = () => {
                   (x.value == data.payment ? "active " : "") +
                   (x.id > 1 ? "ml-10 " : "")
                 }
-                onClick={() =>
+                onClick={() => {
                   setData({
                     ...data,
                     payment: x.value,
-                  })
-                }
+                  });
+                  localStorage.setItem(
+                    "payment",
+                    JSON.stringify({ ...data, payment: x.value })
+                  );
+                }}
               >
                 <div
                   className={
@@ -131,9 +181,9 @@ const Payment = () => {
                 </div>
                 {x.value == data.payment ? (
                   <div>
-                    <span class="checkmark">
-                      <div class="checkmark_stem"></div>
-                      <div class="checkmark_kick"></div>
+                    <span className="checkmark">
+                      <div className="checkmark_stem"></div>
+                      <div className="checkmark_kick"></div>
                     </span>
                   </div>
                 ) : null}
@@ -153,12 +203,14 @@ const Payment = () => {
           </div>
           <div className="cost-goods-shipment d-flex">
             <span>Cost of goods</span>
-            <span className="price">500,000</span>
+            <span className="price">{thousandSeparator(sum[0])}</span>
           </div>
-          <div className="drop-fee-shipment d-flex">
-            <span>Dropshipping Fee</span>
-            <span className="price">5,900</span>
-          </div>
+          {sum[1] !== undefined && (
+            <div className="drop-fee-shipment d-flex">
+              <span>Dropshipping Fee</span>
+              <span className="price">{thousandSeparator(sum[1])}</span>
+            </div>
+          )}
           <div className="drop-fee-shipment d-flex">
             <span>
               <span className="bold-shipment">{data.shipment}</span> Shipment
@@ -167,7 +219,11 @@ const Payment = () => {
           </div>
           <div className="total-fee d-flex">
             <p>Total</p>
-            <p>505,900</p>
+            <p>
+              {thousandSeparator(
+                count.reduce((partialSum, a) => partialSum + a, 0)
+              )}
+            </p>
           </div>
           <a href="/finish">
             <button>Pay with {data.payment}</button>

@@ -31,7 +31,7 @@ export default function Layout() {
               <div className="circle mr-140">
                 <div className="circle-text">1</div>
                 <div className="circle-title">Delivery</div>
-                <i class="circle-arrow"></i>
+                <i className="circle-arrow"></i>
               </div>
               <div
                 className={
@@ -40,7 +40,7 @@ export default function Layout() {
               >
                 <div className="circle-text">2</div>
                 <div className="circle-title">Payment</div>
-                <i class="circle-arrow"></i>
+                <i className="circle-arrow"></i>
               </div>
               <div
                 className={"circle " + (ref !== "finish" ? "not-active" : "")}

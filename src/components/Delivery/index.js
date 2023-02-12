@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { thousandSeparator } from "../../helper";
 
@@ -46,11 +46,19 @@ const Delivery = () => {
     }
   };
 
+  const onClick = () => {
+    localStorage.setItem("delivery", JSON.stringify(sum));
+  };
+
+  useEffect(() => {
+    setSend(JSON.parse(localStorage.getItem("checkbox")));
+  }, []);
+
   return (
     <>
       <div className="delivery w-75">
         <a href="/" className="back">
-          <i class="arrow-back"></i>
+          <i className="arrow-back"></i>
           <div className="title-back">
             Back to cart <div></div>
           </div>
@@ -59,16 +67,18 @@ const Delivery = () => {
           <div className="title-sub-app">Delivery Details</div>
           <div className="rectangle"></div>
           <div className="wrapper-checkbox">
-            <label class="container-label">
+            <label className="container-label">
               Send as dropshipper
               <input
                 type="checkbox"
                 onClick={() => {
                   click();
                   setSend(!send);
+                  localStorage.setItem("checkbox", !send);
                 }}
+                checked={send}
               />
-              <span class="checkmark"></span>
+              <span className="checkmark"></span>
             </label>
           </div>
         </div>
@@ -76,24 +86,24 @@ const Delivery = () => {
           <div className="left-input">
             <div>
               <input type="email" />
-              <span class="floating-label">Email</span>
+              <span className="floating-label">Email</span>
             </div>
             <div>
               <input
                 type="text"
-                class={"phone-number " + (errTel ? "errTel" : "")}
+                className={"phone-number " + (errTel ? "errTel" : "")}
                 value={data.number}
                 onChange={(e) => handleChange(e)}
                 maxLength="20"
               />
-              <span class="floating-label phone-number">Phone Number</span>
+              <span className="floating-label phone-number">Phone Number</span>
             </div>
             <div>
               <textarea
                 maxlength="120"
                 onChange={(e) => setData({ ...data, addres: e.target.value })}
               ></textarea>
-              <span class="floating-label delivery-address">
+              <span className="floating-label delivery-address">
                 Delivery Address {data.addres.length}
               </span>
             </div>
@@ -102,20 +112,20 @@ const Delivery = () => {
             <div>
               <input
                 type="text"
-                class="dropshipper-name"
+                className="dropshipper-name"
                 disabled={send ? false : true}
               />
-              <span class="floating-label dropshipper-name">
+              <span className="floating-label dropshipper-name">
                 Dropshipper name
               </span>
             </div>
             <div>
               <input
                 type="text"
-                class="dropshipper-number"
+                className="dropshipper-number"
                 disabled={send ? false : true}
               />
-              <span class="floating-label dropshipper-number">
+              <span className="floating-label dropshipper-number">
                 Dropshipper phone number
               </span>
             </div>
@@ -145,7 +155,7 @@ const Delivery = () => {
             </p>
           </div>
           <Link to="payment">
-            <button>Continue to Payment</button>
+            <button onClick={() => onClick()}>Continue to Payment</button>
           </Link>
         </div>
       </div>{" "}

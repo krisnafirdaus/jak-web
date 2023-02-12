@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { thousandSeparator } from "../../helper";
 import "./Finish.scss";
 
 const Finish = () => {
+  const [count, setCount] = useState([]);
   let dataPayment = JSON.parse(localStorage.getItem("payment"));
   function generateRandomString() {
     let characters = "23456789ABCDEFGHJKLMNPQRSTUVWXYZ";
@@ -14,6 +16,10 @@ const Finish = () => {
 
     return randomString;
   }
+
+  useEffect(() => {
+    setCount(JSON.parse(localStorage.getItem("finishcount")));
+  }, []);
 
   return (
     <>
@@ -48,12 +54,14 @@ const Finish = () => {
           </div>
           <div className="cost-goods-shipment d-flex">
             <span>Cost of goods</span>
-            <span className="price">500,000</span>
+            <span className="price">{thousandSeparator(count[0])}</span>
           </div>
-          <div className="drop-fee-shipment d-flex">
-            <span>Dropshipping Fee</span>
-            <span className="price">5,900</span>
-          </div>
+          {count.length > 2 && (
+            <div className="drop-fee-shipment d-flex">
+              <span>Dropshipping Fee</span>
+              <span className="price">{thousandSeparator(count[1])}</span>
+            </div>
+          )}
           <div className="drop-fee-shipment d-flex">
             <span>
               <span className="bold-shipment">{dataPayment.shipment}</span>{" "}
@@ -63,7 +71,11 @@ const Finish = () => {
           </div>
           <div className="total-fee-finish d-flex">
             <p>Total</p>
-            <p>505,900</p>
+            <p>
+              {thousandSeparator(
+                count.reduce((partialSum, a) => partialSum + a, 0)
+              )}
+            </p>
           </div>
         </div>
       </div>
