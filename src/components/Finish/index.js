@@ -32,7 +32,15 @@ const Finish = () => {
             <span className="order-will">
               Your order will be delivered today with {dataPayment?.shipment}
             </span>
-            <a href="/" className="back">
+            <a
+              href="/"
+              className="back"
+              onClick={() => {
+                localStorage.removeItem("finishcount");
+                localStorage.removeItem("payment");
+                localStorage.removeItem("delivery");
+              }}
+            >
               <i className="arrow-back"></i>
               <div className="title-back">Go to Homepage</div>
             </a>
